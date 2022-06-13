@@ -135,4 +135,8 @@ void vga_scroll(void)
 			vga_set_char_at(vga_get_char_at(x, y + 1), x, y);
 		}
 	}
+	for (u8 x = 0; x < VGA_WIDTH; x++) {
+		vga_set_char_at(0, x, VGA_HEIGHT - 1);
+	}
+	screen.cursor_y--;
 }
