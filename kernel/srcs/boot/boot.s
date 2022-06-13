@@ -7,16 +7,17 @@ CHECKSUM		equ -MAGIC_NUMBER	; checksum : (magic number + checksum + flags should
 KERNEL_STACK_SIZE	equ 4096		; the c stack size
 
 
-section .text:
+section .__mbHeader
 align 4
 	; writing boot info at the start of the file
 	dd MAGIC_NUMBER
 	dd FLAGS
 	dd CHECKSUM
 
+section .text
+align 4
 ; entry point
 loader:
-	mov eax, 0xCAFEBABE
 	mov esp, kernel_stack + KERNEL_STACK_SIZE	; setup the stack pointer
 	
 	extern kmain
