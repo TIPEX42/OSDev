@@ -1,4 +1,5 @@
 #include "types.h"
+#include "io/io.h"
 
 #define Black 0;
 #define Blue 1
@@ -28,5 +29,6 @@ void write_cell(u32 i, u8 c, u8 fg, u8 bg)
 int kmain(void)
 {
 	write_cell(0, 'H', LightBlue, White);
+	vga_set_cursor_pos(0, 10);
 	return (0);
 }
