@@ -12,6 +12,8 @@ void interrupt_handler_0x0D();
 void interrupt_handler_0x0E();
 void interrupt_handler_0x21();
 
+void keyboard_interrupt_handler();
+
 struct cpu_state
 {
 	u32 eax;
@@ -48,6 +50,8 @@ struct idt_desc
 
 struct idt_entry idt_entries[256];
 struct idt_desc idt_desc;
+
+static i8 *keycode = "\e 1234567890-=\b\tqwertyuiop[]\n\0asdfghjkl;'`\0\\zxcvbnm,./\0\0\0 ";
 
 static void	ft_print(i32 nb, i32 modulo)
 {
@@ -122,6 +126,7 @@ void idt_set_entry(u32 entry, u32 func_address)
 
 void idt_interrupt_handler(struct cpu_state cpu, int interrupt, int error_code)
 {
+	(void) error_code;
 	if (interrupt == 0x0)
 	{
 		__asm__("cli");
@@ -160,10 +165,16 @@ void idt_interrupt_handler(struct cpu_state cpu, int interrupt, int error_code)
 	(void)cpu;
 	if (interrupt == 0x21)
 	{
-		i8 scan_code = (i8) inportb(0x60);
-		vga_write(&scan_code, 1);
-		pic_send_EOI(1);
+		keyboard_interrupt_handler();
 	}
 	else
 		vga_write("wrong it\n", 9);
+}
+
+void keyboard_interrupt_handler()
+{
+	i32 scan_code = (i32) inportb(0x60);
+	if (scan_code < 60 && scan_code > 0 && keycode[scan_code] > 0 && keycode[scan_code] < 127)
+		vga_write(&keycode[scan_code], 1);
+	pic_send_EOI(1);
 }
