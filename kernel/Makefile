@@ -1,15 +1,12 @@
-CC				:=		gcc
-CC_FLAGS		:=		-m32 -nostdlib -nostdinc -fno-builtin -fno-stack-protector -nostartfiles -nodefaultlibs
+CC_FLAGS		:=		-m32 -nostdlib -nostdinc -fno-builtin -fno-stack-protector -nodefaultlibs
 CC_FLAGS		+=		-Wall -Wextra -Werror
 CC_FLAGS		+=		-I include -I srcs
 
-LD				:=		ld
 LD_FLAGS		:=		-T $(CONFIG_DIR)/link.ld -melf_i386
 
 NASM			:=		nasm
 NASM_FLAGS		:=		-f elf32
 
-GENISO			:=		genisoimage
 GENISO_FLAGS	:=		-R -b boot/grub/stage2_eltorino -no-emul-boot	\
 						-boot-load-size 4 -A os -input-charset utf8		\
 						-quiet -boot-info-table

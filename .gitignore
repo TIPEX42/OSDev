@@ -1,3 +1,5 @@
 build/
 output/
 .vscode/
+.idea/
+kernel/iso/boot/kernel.elf
