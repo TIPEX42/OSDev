@@ -1,5 +1,5 @@
 CC_FLAGS		:=		-m32 -nostdlib -nostdinc -fno-builtin -fno-stack-protector -nodefaultlibs
-CC_FLAGS		+=		#-Wall -Wextra -Werror
+CC_FLAGS		+=		-Wall -Wextra -Werror
 CC_FLAGS		+=		-I include -I srcs
 
 LD_FLAGS		:=		-T $(CONFIG_DIR)/link.ld -melf_i386

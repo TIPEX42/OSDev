@@ -124,30 +124,35 @@ void idt_interrupt_handler(struct cpu_state cpu, int interrupt, int error_code)
 {
 	if (interrupt == 0x0)
 	{
+		__asm__("cli");
 		vga_write("Division by zero\n", 17);
 		while (1)
 			;
 	}
 	if (interrupt == 0x08)
 	{
+		__asm__("cli");
 		vga_write("Double fault\n", 13);
 		while (1)
 			;
 	}
 	if (interrupt == 0x0B)
 	{
+		__asm__("cli");
 		vga_write("Segment not present\n", 20);
 		while (1)
 			;
 	}
 	if (interrupt == 0x0D)
 	{
+		__asm__("cli");
 		vga_write("General protection fault\n", 25);
 		while (1)
 			;
 	}
 	if (interrupt == 0x0E)
 	{
+		__asm__("cli");
 		vga_write("Page fault\n", 11);
 		while (1)
 			;

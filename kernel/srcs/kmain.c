@@ -26,12 +26,5 @@ int kmain(void)
 	serial_write("pic initialized!\n", 17);
 	vga_write("pic initialized!\n", 17);
 	__asm__("sti");
-	//while (1)
-	//{
-	//	vga_write("Hello, world!", 13);
-	//}
-	for(;;) {
-		__asm__("hlt");
-	}
 	return (0);
 }
