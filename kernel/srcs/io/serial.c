@@ -66,7 +66,7 @@ void serial_configure_baud_rate(u16 com, u16 divisor)
  */
 void serial_configure_line(u16 com)
 {
-	/* Bit:     | 7 | 6 | 5 4 3 | 2 | 1 0 |
+	/* Bit:	 | 7 | 6 | 5 4 3 | 2 | 1 0 |
 	 * Content: | d | b | prty  | s | dl  |
 	 * Value:   | 0 | 0 | 0 0 0 | 0 | 1 1 | = 0x03
 	 */
@@ -108,7 +108,7 @@ void serial_configure_modem(u16 com)
  *
  *  @param  com The COM port
  *  @return 0 if the transmit FIFO queue is not empty
- *          1 if the transmit FIFO queue is empty
+ *		  1 if the transmit FIFO queue is empty
  */
 bool serial_is_buffer_empty(u16 com)
 {

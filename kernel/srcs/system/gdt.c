@@ -19,31 +19,31 @@ struct gdt_entry
 	u8 base_high;
 };
 
-struct gdt_entry entries[3];
-struct gdt_desc desc;
+struct gdt_entry gdt_entries[3];
+struct gdt_desc gdt_desc;
 
-void gdt_init(void)
+void gdt_initialize(void)
 {
 	gdt_set_entry(0, 0, 0, 0, 0);
 	gdt_set_entry(1, 0, 0xFFFFFFFF, 0x9A, 0xCF);
 	gdt_set_entry(2, 0, 0xFFFFFFFF, 0x92, 0xCF);
 
-	desc.address = (u32)&entries;
-	desc.size = sizeof(struct gdt_entry) * 3 - 1;
+	gdt_desc.address = (u32)gdt_entries;
+	gdt_desc.size = sizeof(struct gdt_entry) * 3 - 1;
 
 	gdt_finalize();
 }
 
 static void gdt_set_entry(u32 entry, u32 base, u32 limit, u8 access, u8 granularity)
 {
-	entries[entry].base_low = base & 0xFFFF;
-	entries[entry].base_mid = (base >> 16) & 0xFF;
-	entries[entry].base_high = (base >> 24) & 0xFF;
+	gdt_entries[entry].base_low = base & 0xFFFF;
+	gdt_entries[entry].base_mid = (base >> 16) & 0xFF;
+	gdt_entries[entry].base_high = (base >> 24) & 0xFF;
 
-	entries[entry].limit_low = limit & 0xFFFF;
+	gdt_entries[entry].limit_low = limit & 0xFFFF;
 
-	entries[entry].granularity = (limit >> 16) & 0x0F;
-	entries[entry].granularity |= granularity & 0xF0;
+	gdt_entries[entry].granularity = (limit >> 16) & 0x0F;
+	gdt_entries[entry].granularity |= granularity & 0xF0;
 
-	entries[entry].access = access;
+	gdt_entries[entry].access = access;
 }

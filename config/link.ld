@@ -3,10 +3,10 @@ ENTRY(loader)		/* entry point of the program */
 SECTIONS {
 	. = 0x00100000;
 
-    .__mbHeader :
-    {
-        *(.__mbHeader)
-    }
+	.__mbHeader :
+	{
+		*(.__mbHeader)
+	}
 
 	.text ALIGN (0x1000) :
 	{

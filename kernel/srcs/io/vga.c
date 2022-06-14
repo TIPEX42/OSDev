@@ -23,7 +23,7 @@ struct vga_screen
 static u8 *framebuffer = (u8 *) 0x000B8000;
 static struct vga_screen screen;
 
-void vga_init(void)
+void vga_initialize(void)
 {
 	screen.color = VGA_White;
 	screen.cursor_x = 0;

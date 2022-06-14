@@ -12,9 +12,13 @@ GENISO_FLAGS	:=		-R -b boot/grub/stage2_eltorino -no-emul-boot	\
 						-quiet -boot-info-table
 
 SRCS_NAME		:=		kmain.c								\
+						\
 						boot/boot.s							\
+						\
 						io/ports.c io/vga.c io/serial.c		\
-						system/gdt.c system/gdt_finalize.s	\
+						\
+						system/gdt.c system/gdt_finalize.s\
+						system/interrupt_manager.c system/interrupts.s\
 
 SRCS_DIR		:=		srcs
 SRCS			:=		$(addprefix $(SRCS_DIR)/, $(SRCS_NAME))

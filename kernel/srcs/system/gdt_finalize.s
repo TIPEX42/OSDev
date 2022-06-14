@@ -1,11 +1,10 @@
 global gdt_finalize
-extern desc
-
+extern gdt_desc
 
 section .text
 align 4
 gdt_finalize:
-    lgdt [desc]
+    lgdt [gdt_desc]
     mov ax, 0x10
     mov ds, ax
     mov es, ax
