@@ -1,5 +1,5 @@
 CC_FLAGS		:=		-m32 -nostdlib -nostdinc -fno-builtin -fno-stack-protector -nodefaultlibs
-CC_FLAGS		+=		-Wall -Wextra -Werror
+CC_FLAGS		+=		#-Wall -Wextra -Werror
 CC_FLAGS		+=		-I include -I srcs
 
 LD_FLAGS		:=		-T $(CONFIG_DIR)/link.ld -melf_i386
@@ -15,10 +15,10 @@ SRCS_NAME		:=		kmain.c								\
 						\
 						boot/boot.s							\
 						\
-						io/ports.c io/vga.c io/serial.c		\
+						io/ports.c io/vga.c io/serial.c io/pic.c io/io.c\
 						\
 						system/gdt.c system/gdt_finalize.s\
-						system/interrupt_manager.c system/interrupts.s\
+						system/interrupt_manager.c system/interrupt_init.s\
 
 SRCS_DIR		:=		srcs
 SRCS			:=		$(addprefix $(SRCS_DIR)/, $(SRCS_NAME))
@@ -36,7 +36,7 @@ KERNEL_NAME		:=		kernel.elf
 KERNEL			:=		$(addprefix $(OBJECTS_DIR)/, $(KERNEL_NAME))
 
 .PHONY: all
-all: info $(OUT_DIRECTORIES) iso
+all: $(OUT_DIRECTORIES) iso
 
 .PHONY: info
 info:

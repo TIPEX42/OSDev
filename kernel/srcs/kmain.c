@@ -2,6 +2,7 @@
 #include "io/serial.h"
 #include "system/gdt.h"
 #include "system/interrupt.h"
+#include "io/pic.h"
 
 i8 *text = "hello";
 
@@ -20,5 +21,17 @@ int kmain(void)
 	idt_initialize();
 	serial_write("idt initialized!\n", 17);
 	vga_write("idt initialized!\n", 17);
+
+	pic_initialize();
+	serial_write("pic initialized!\n", 17);
+	vga_write("pic initialized!\n", 17);
+	__asm__("sti");
+	//while (1)
+	//{
+	//	vga_write("Hello, world!", 13);
+	//}
+	for(;;) {
+		__asm__("hlt");
+	}
 	return (0);
 }

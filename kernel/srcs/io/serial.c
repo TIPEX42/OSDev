@@ -80,7 +80,7 @@ void serial_configure_line(u16 com)
 */
 void serial_configure_buffer(u16 com)
 {
-	/* Bit:     | 7 6 | 5  | 4 |  3  |  2  |  1  | 0 |
+	/* Bit:	 | 7 6 | 5  | 4 |  3  |  2  |  1  | 0 |
 	* Content: | lvl | bs | r | dma | clt | clr | e |
 	* Value:   | 1 1 | 0 | 0 |  0  |  1  |  1  | 1 | = 0xC7
 	*/
@@ -95,7 +95,7 @@ void serial_configure_buffer(u16 com)
 */
 void serial_configure_modem(u16 com)
 {
-	/*Bit:     | 7 | 6 | 5  | 4  | 3   | 2   | 1   | 0   |
+	/*Bit:	 | 7 | 6 | 5  | 4  | 3   | 2   | 1   | 0   |
 	* Content: | r | r | af | lb | ao2 | ao1 | rts | dtr |
 	* Value:   | 0 | 0 | 0 |  0  |  0  |  1  | 1 | = 0x03
 	*/

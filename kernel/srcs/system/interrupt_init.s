@@ -22,8 +22,6 @@ interrupt_handler_%1:
 	jmp common_interrupt_handler	; jump to the common handler
 %endmacro
 
-
-extern interrupt_handler
 common_interrupt_handler:			; the common parts of the generic interrupt handler
 	; save the registers
 	push eax
@@ -36,25 +34,28 @@ common_interrupt_handler:			; the common parts of the generic interrupt handler
 	push esp
 
 	; call the C function
-	call interrupt_handler
+	extern idt_interrupt_handler
+	call idt_interrupt_handler
 
 	; restore the registers
+    pop esp
+    pop ebp
+    pop edi
+    pop edx
+    pop ecx
+    pop esi
+    pop ebx
 	pop eax
-	pop ebx
-	pop ecx
-	pop edx
-	pop esi
-	pop edi
-	pop ebp
-	pop esp
 
 	; restore the esp
-	add esp, 8
+	add	 esp, 8
 
-    ; return to the code that got interrupted
+	; return to the code that got interrupted
 	iret
 
-no_error_code_interrupt_handler 0
-no_error_code_interrupt_handler 1
-
-error_code_interrupt_handler 7
+no_error_code_interrupt_handler 0x00
+error_code_interrupt_handler 0x08
+error_code_interrupt_handler 0x0B
+error_code_interrupt_handler 0x0D
+error_code_interrupt_handler 0x0E
+no_error_code_interrupt_handler 0x21
