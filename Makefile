@@ -16,6 +16,7 @@ all:
 run: all
 	bochs -f $(CONFIG_DIR)/bochsrc.txt -q || echo "simulation ended"
 	mv bochslog.txt $(OUTPUT_DIR)/
+	mv com1.out $(OUTPUT_DIR)/
 
 .PHONY: clean
 clean:

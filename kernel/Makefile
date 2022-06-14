@@ -14,7 +14,7 @@ GENISO_FLAGS	:=		-R -b boot/grub/stage2_eltorino -no-emul-boot	\
 						-boot-load-size 4 -A os -input-charset utf8		\
 						-quiet -boot-info-table
 
-SRCS_NAME		:=		kmain.c io/ports.c io/vga.c boot/boot.s
+SRCS_NAME		:=		kmain.c io/ports.c io/vga.c io/serial.c boot/boot.s
 SRCS_DIR		:=		srcs
 SRCS			:=		$(addprefix $(SRCS_DIR)/, $(SRCS_NAME))
 
