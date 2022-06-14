@@ -14,7 +14,11 @@ GENISO_FLAGS	:=		-R -b boot/grub/stage2_eltorino -no-emul-boot	\
 						-boot-load-size 4 -A os -input-charset utf8		\
 						-quiet -boot-info-table
 
-SRCS_NAME		:=		kmain.c io/ports.c io/vga.c io/serial.c boot/boot.s
+SRCS_NAME		:=		kmain.c								\
+						boot/boot.s							\
+						io/ports.c io/vga.c io/serial.c		\
+						system/gdt.c system/gdt_finalize.s	\
+
 SRCS_DIR		:=		srcs
 SRCS			:=		$(addprefix $(SRCS_DIR)/, $(SRCS_NAME))
 
@@ -31,7 +35,11 @@ KERNEL_NAME		:=		kernel.elf
 KERNEL			:=		$(addprefix $(OBJECTS_DIR)/, $(KERNEL_NAME))
 
 .PHONY: all
-all: $(OUT_DIRECTORIES) iso
+all: info $(OUT_DIRECTORIES) iso
+
+.PHONY: info
+info:
+	@echo "[$(OUT_DIRECTORIES)]"
 
 .PHONY: iso
 iso: $(ISO)
@@ -52,7 +60,7 @@ $(OBJECTS_DIR)/%.o: $(SRCS_DIR)/%.s
 	$(NASM) $(NASM_FLAGS) $< -o $@
 
 $(OUT_DIRECTORIES):
-	mkdir -p $^
+	mkdir -p $(OUT_DIRECTORIES)
 
 .PHONY: clean
 clean:
