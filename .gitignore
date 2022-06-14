@@ -3,3 +3,4 @@ output/
 .vscode/
 .idea/
 kernel/iso/boot/kernel.elf
+config/bochsrc.txt

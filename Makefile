@@ -46,11 +46,21 @@ setup_macos:
 	brew install i386-elf-binutils i386-elf-gcc
 	brew install cdrtools
 	brew install nasm
+	brew install bochs
+	cat $(CONFIG_DIR)/bochsrc_base.txt > $(CONFIG_DIR)/bochsrc.txt
+	echo "romimage:			file=$(HOME)/.brew/Cellar/bochs/2.7/share/bochs/BIOS-bochs-latest" >> $(CONFIG_DIR)/bochsrc.txt
+	echo "vgaromimage:		file=$(HOME)/.brew/Cellar/bochs/2.7/share/bochs/VGABIOS-lgpl-latest" >> $(CONFIG_DIR)/bochsrc.txt
 
 .PHONY: setup_fedora
 setup_fedora:
-	dnf install nasm genisoimage
+	dnf install nasm genisoimage bochs
+	cat $(CONFIG_DIR)/bochsrc_base.txt > $(CONFIG_DIR)/bochsrc.txt
+	echo "romimage:			file=/usr/share/bochs/BIOS-bochs-latest" >> $(CONFIG_DIR)/bochsrc.txt
+	echo "vgaromimage:		file=/usr/share/bochs/VGABIOS-lgpl-latest" >> $(CONFIG_DIR)/bochsrc.txt
 
 .PHONY: setup_debian
 setup_debian:
-	apt install nasm genisoimage
+	apt install nasm genisoimage bochs
+	cat $(CONFIG_DIR)/bochsrc_base.txt > $(CONFIG_DIR)/bochsrc.txt
+	echo "romimage:			file=/usr/share/bochs/BIOS-bochs-latest" >> $(CONFIG_DIR)/bochsrc.txt
+	echo "vgaromimage:		file=/usr/share/bochs/VGABIOS-lgpl-latest" >> $(CONFIG_DIR)/bochsrc.txt
